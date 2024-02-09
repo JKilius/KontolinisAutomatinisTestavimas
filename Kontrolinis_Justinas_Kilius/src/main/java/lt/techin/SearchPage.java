@@ -1,6 +1,7 @@
 package lt.techin;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -18,7 +19,7 @@ public class SearchPage extends BasePage{
     List<WebElement> textItemDescription;
 
     @FindBy(xpath = "//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]")
-    WebElement buttonsAddToCart;
+    List<WebElement> buttonsAddToCart;
 
     @FindBy(xpath = "//button[@id='button-list']")
     WebElement buttonSelectList;
@@ -45,11 +46,8 @@ public class SearchPage extends BasePage{
         return textItemDescription.stream().map(WebElement::getText).toList();
     }
 
-    public void clickAllAddToCartButtons(){
+    public void clickAllAddToCartButtons() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        //wait.until(ExpectedConditions.visibilityOf());
-       // buttonsAddToCart.stream().forEach(WebElement::click);
-
         Actions actions = new Actions(driver);
         List<WebElement> button = driver.findElements(By.xpath("//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]"));
         for(WebElement i:button){
@@ -58,6 +56,24 @@ public class SearchPage extends BasePage{
             actions.click(i).build().perform();
 
         }
+//        Actions actions = new Actions(driver);
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        for (WebElement button : buttonsAddToCart) {
+//            // Perform hover action using JavaScript
+//            js.executeScript("arguments[0].dispatchEvent(new Event('mouseover'))", button);
+//
+//            // Wait for the button to be clickable
+//            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+//        }
+
+    }
+
+    public void clickOneAddToCartButton(){
+
+
     }
 
     public void addProductToCart(){

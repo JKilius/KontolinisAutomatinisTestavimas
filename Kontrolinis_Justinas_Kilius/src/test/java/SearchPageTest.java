@@ -30,11 +30,9 @@ public class SearchPageTest extends BasePageTest{
         mainPage=new MainPage(driver);
         searchPage=new SearchPage(driver);
 
-
         mainPage.inputSearchItem("Duck");
         mainPage.clickButtonSearch();
         searchPage.clickButtonSelectList();
-
 
         searchPage.clickAllAddToCartButtons();
     }
