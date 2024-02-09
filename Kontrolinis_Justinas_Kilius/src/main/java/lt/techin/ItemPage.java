@@ -1,8 +1,13 @@
 package lt.techin;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class ItemPage extends BasePage {
@@ -19,6 +24,9 @@ public class ItemPage extends BasePage {
     @FindBy(xpath = "//ul[@class='dropdown-menu dropdown-menu-end p-2 show']")
     WebElement dropdownCartInfo;
 
+    @FindBy(xpath = "//div[@id='alert']")
+    WebElement alertMessage;
+
     public ItemPage(WebDriver driver) {
         super(driver);
     }
@@ -31,11 +39,45 @@ public class ItemPage extends BasePage {
         inputQuantity.sendKeys(quantity);
     }
 
+    public String getQuantity(){
+        return inputQuantity.getAttribute("value");
+    }
+
     public void clickButtonAddToCart(){
         buttonAddToCart.click();
     }
 
-    
+    public void clickCartDropdown(){
+        try {
+            WebElement button = driver.findElement(By.xpath("//div[@class='dropdown d-grid']/button"));
+            button.click();
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            WebElement button = driver.findElement(By.xpath("//div[@class='dropdown d-grid']/button"));
+            button.click();
+        }
+    }
+
+    public String getCartInfo(){
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownCartInfo));
+        return dropdownCartInfo.getText();
+    }
+
+    public boolean isAlertMessageVisible(){
+        return alertMessage.isDisplayed();
+    }
+
+    public String textAlertMessage(){
+        return alertMessage.getText();
+    }
+
+    public String generateRandomNumber(){
+        int num = (int)(Math.random()*20);
+        return String.valueOf(num);
+    }
+
 
 
 }
