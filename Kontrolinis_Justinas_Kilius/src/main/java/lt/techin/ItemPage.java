@@ -60,8 +60,6 @@ public class ItemPage extends BasePage {
     }
 
     public String getCartInfo(){
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//        wait.until(ExpectedConditions.visibilityOf(dropdownCartInfo));
         return dropdownCartInfo.getText();
     }
 

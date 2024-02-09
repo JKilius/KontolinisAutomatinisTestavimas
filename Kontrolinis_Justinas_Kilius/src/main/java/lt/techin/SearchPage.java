@@ -22,6 +22,17 @@ public class SearchPage extends BasePage{
 
     @FindBy(xpath = "//button[@id='button-list']")
     WebElement buttonSelectList;
+
+    @FindBy(xpath = "//div[@class='dropdown d-grid']/button")
+    WebElement buttonCartDropdown;
+
+    @FindBy(xpath = "//div[@class='dropdown d-grid']/ul")
+    WebElement dropdownCart;
+
+    @FindBy(xpath = "//div[@class='dropdown d-grid']/strong[contains(@text(), 'View Cart')]")
+    WebElement buttonViewCart;
+
+
     public SearchPage(WebDriver driver) {
         super(driver);
     }
@@ -47,9 +58,21 @@ public class SearchPage extends BasePage{
             actions.click(i).build().perform();
 
         }
+    }
 
+    public void addProductToCart(){
 
     }
+
+    public void clickViewCart(){
+        buttonViewCart.click();
+    }
+
+    public void clickButtonCartDropDown(){
+        buttonCartDropdown.click();
+    }
+
+
 
 
 }

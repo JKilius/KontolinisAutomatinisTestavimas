@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QAPage extends BasePage{
 
@@ -13,6 +14,9 @@ public class QAPage extends BasePage{
 
     @FindBy(xpath = "//div[@class='description']")
     List<WebElement> productDescription;
+
+    @FindBy(xpath = "//div[@class='description']/h4/a")
+    List<WebElement> productName;
 
     @FindBy(xpath = "//div[@class='description']/h4/a[contains(text(), 'Code Confusion Raccoon')]")
     WebElement linkToRacoonItem;
@@ -52,6 +56,14 @@ public class QAPage extends BasePage{
 
     public void clickPills(){
         linkToCalmPillsItem.click();
+    }
+
+    public void clickSelectedItemByName(String itemName){
+       productName.stream().filter(e->e.getText().contains(itemName)).findFirst().ifPresent(WebElement::click);
+    }
+
+    public boolean isProductNameInTheWebSite(String item){
+        return productName.stream().map(WebElement::getText).toList().contains(item);
     }
 
 
