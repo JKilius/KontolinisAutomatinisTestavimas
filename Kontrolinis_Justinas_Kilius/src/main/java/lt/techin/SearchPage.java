@@ -18,7 +18,9 @@ public class SearchPage extends BasePage{
     @FindBy(xpath = "//div[@class='description']")
     List<WebElement> textItemDescription;
 
-    @FindBy(xpath = "//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]")
+    @FindBy(css = ".fa-shopping-cart")
+    //@FindBy(xpath = "//div[@class='button-group']/button[1]")
+   // @FindBy(xpath = "//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]")
     List<WebElement> buttonsAddToCart;
 
     @FindBy(xpath = "//button[@id='button-list']")
@@ -27,8 +29,6 @@ public class SearchPage extends BasePage{
     @FindBy(xpath = "//div[@class='dropdown d-grid']/button")
     WebElement buttonCartDropdown;
 
-    @FindBy(xpath = "//div[@class='dropdown d-grid']/ul")
-    WebElement dropdownCart;
 
     @FindBy(xpath = "//div[@class='dropdown d-grid']/strong[contains(@text(), 'View Cart')]")
     WebElement buttonViewCart;
@@ -49,13 +49,14 @@ public class SearchPage extends BasePage{
     public void clickAllAddToCartButtons() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         Actions actions = new Actions(driver);
-        List<WebElement> button = driver.findElements(By.xpath("//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]"));
-        for(WebElement i:button){
-            actions.moveToElement(i).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(i));
-            actions.click(i).build().perform();
-
-        }
+     //   List<WebElement> buttons = driver.findElements(By.xpath("//div[@class='button-group']/button[contains(@aria-label, 'Add to Cart')]"));
+        buttonsAddToCart.forEach(WebElement::click);
+        //        for(WebElement i:button){
+//            actions.moveToElement(i).build().perform();
+//            wait.until(ExpectedConditions.elementToBeClickable(i));
+//            actions.click(i).build().perform();
+//
+//        }
 //        Actions actions = new Actions(driver);
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 //
@@ -68,15 +69,6 @@ public class SearchPage extends BasePage{
 //            // Wait for the button to be clickable
 //            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
 //        }
-
-    }
-
-    public void clickOneAddToCartButton(){
-
-
-    }
-
-    public void addProductToCart(){
 
     }
 

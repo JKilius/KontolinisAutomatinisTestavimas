@@ -24,6 +24,7 @@ ShoppingCartPage shoppingCartPage;
 
         searchPage.clickAllAddToCartButtons();
 
+
         searchPage.clickButtonCartDropDown();
         searchPage.clickViewCart();
 
